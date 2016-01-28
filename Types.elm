@@ -8,25 +8,25 @@ type Node
   | BinaryExpression { left: Node, right: Node, operator: String }
   | VariableDeclaration { identifier: Node, init: Node }
   | Constant Int
-  | VariableName VariableName
+  | Variable VariableName
   | Nothing
 
 fn : a -> b -> c -> { args : a, body : b, return : c }
 fn args body return = { args = args, body = body, return = return }
 
 add : { args : List Node, body : List Node, return : Node }
-add = fn [VariableName "a", VariableName "b"]
+add = fn [Variable "a", Variable "b"]
       [ VariableDeclaration
-          { identifier = VariableName "sum"
+          { identifier = Variable "sum"
           , init = BinaryExpression
-                   { left = VariableName "a"
-                   , right = VariableName "b"
+                   { left = Variable "a"
+                   , right = Variable "b"
                    , operator = "+"
                    }
           }
-      , VariableDeclaration { identifier = VariableName "number", init = Constant 56 }
+      , VariableDeclaration { identifier = Variable "number", init = Constant 56 }
       ]
-      (VariableName "sum")
+      (Variable "sum")
 
 main : Html.Html
 main =
