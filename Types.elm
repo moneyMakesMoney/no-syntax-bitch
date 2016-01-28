@@ -1,4 +1,4 @@
-module NoSyntaxBitch where
+module NoSyntaxBitch.Types where
 import Html exposing (text)
 
 type alias VariableName = String
