@@ -2,10 +2,12 @@ module NoSyntaxBitch where
 import Html exposing (text)
 
 type alias VariableName = String
+type alias OperatorName = String
 
 type Node
   = Function { args: List Node, body: List Node, return: Node }
-  | BinaryExpression { left: Node, right: Node, operator: String }
+  | BinaryExpression { left: Node, right: Node, operator: OperatorName }
+  | UnaryExpression { right: Node, operator: OperatorName }
   | VariableDeclaration { identifier: Node, init: Node }
   | Constant Int
   | Variable VariableName
