@@ -1,30 +1,34 @@
-module NoSyntaxBitch.Operators where
+module NoSyntaxBitch.Operators (..) where
+
 
 binary : List String
-binary = ["+"
-         , "-"
-         , "=="
-         , "==="
-         , "!="
-         , "!=="
-         , ">"
-         , "<"
-         , ">="
-         , "<="
-         , "/"
-         , "%"
-         , "**"
-         , "in"
-         , "instanceof"
-         ]
+binary =
+    [ "+"
+    , "-"
+    , "=="
+    , "==="
+    , "!="
+    , "!=="
+    , ">"
+    , "<"
+    , ">="
+    , "<="
+    , "/"
+    , "%"
+    , "**"
+    , "in"
+    , "instanceof"
+    ]
+
 
 unary : List String
-unary = ["+"
-        , "-"
-        , "!"
-        , "++"
-        , "--"
-        , "typeof"
-        , "delete"
-        , "void"
-        ]
+unary =
+    [ "+"
+    , "-"
+    , "!"
+    , "++"
+    , "--"
+    , "typeof"
+    , "delete"
+    , "void"
+    ]
