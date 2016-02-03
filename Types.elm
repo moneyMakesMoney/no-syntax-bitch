@@ -11,22 +11,38 @@ type alias OperatorName =
     String
 
 
+type VariableDeclaration
+    = Declaration
+        { type' : String
+        , id : { type' : String, name : String }
+        , init : Node
+        }
+
+
 type Node
-    = Function { args : List Node, body : List Node, return : Node }
+    = Function
+        { params : List Node
+        , defaults : List Node
+        , body : List Node
+        , generator : Bool
+        , expression : Bool
+        , return : Node
+        }
     | BinaryExpression { left : Node, right : Node, operator : OperatorName }
     | UnaryExpression { right : Node, operator : OperatorName }
     | VariableDeclaration { identifier : Node, init : Node }
     | Constant Int
     | Variable VariableName
+    | VariableDeclarations { declarations : List VariableDeclaration, kind : String }
     | Nothing
 
 
-fn : a -> b -> c -> { args : a, body : b, return : c }
-fn args body return =
-    { args = args, body = body, return = return }
+fn : a -> b -> c -> { params : a, body : b, return : c }
+fn params body return =
+    { params = params, body = body, return = return }
 
 
-add : { args : List Node, body : List Node, return : Node }
+add : { params : List Node, body : List Node, return : Node }
 add =
     fn
         [ Variable "a", Variable "b" ]
