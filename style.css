@@ -1,0 +1,293 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.todomvc-wrapper {
+  visibility: visible !important;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 100%;
+  vertical-align: baseline;
+  font-family: inherit;
+  color: inherit;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+body {
+  font: 16px 'Fira Code';
+  line-height: 1.4em;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+button,
+input[type="checkbox"] {
+  outline: none;
+}
+
+input {
+  font: 16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#todoapp {
+  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
+  margin: 24px;
+  width: 400px;
+}
+
+#todoapp h1 {
+  width: 100%;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  font-variant: small-caps;
+}
+
+#new-variable,
+.edit {
+  margin: 0;
+  width: 100%;
+  font-size: 16px;
+  font-family: inherit;
+  border: 0;
+  outline: none;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.edit {
+  margin-left: 8px;
+}
+
+p {
+  margin: 0;
+}
+
+#variables-list li,
+#variables-list li p,
+.view {
+  height: 24px;
+  line-height: 24px;
+  overflow: hidden;
+}
+
+#variables-list li p {
+  color: #999;
+  padding-right: 10px;
+}
+
+#new-variable {
+  border: none;
+  z-index: 2;
+  background: #eee;
+  box-shadow: none;
+  margin-left: 10px;
+}
+
+.new-variable-container {
+  background: #eee;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+#main {
+  position: relative;
+  z-index: 2;
+}
+
+#variables-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#variables-list li .toggle {
+  width: 40px;
+  /* auto, since non-WebKit browsers doesn't support input styling */
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  /* Mobile Safari */
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+#variables-list li .toggle:after {
+  content: '✔';
+  /* 40 + a couple of pixels visual adjustment */
+  line-height: 43px;
+  font-size: 20px;
+  color: #d9d9d9;
+  text-shadow: 0 -1px 0 #bfbfbf;
+}
+
+#variables-list li .toggle:checked:after {
+  color: #85ada7;
+  text-shadow: 0 1px 0 #669991;
+  bottom: 1px;
+  position: relative;
+}
+
+#variables-list li,
+.view {
+  height: 44px;
+}
+
+.view {
+  padding: 10px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+#variables-list li label {
+  white-space: pre;
+  word-break: break-word;
+  display: block;
+}
+
+#variables-list li .destroy {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  font-size: 22px;
+  color: #a88a8a;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+#variables-list li .destroy:after {
+  content: '✖';
+}
+
+#variables-list li:hover .destroy {
+  display: block;
+}
+
+#variables-list li.editing:last-child {
+  margin-bottom: -1px;
+}
+
+#footer {
+  color: #777;
+  padding: 0 15px;
+  position: absolute;
+  right: 0;
+  bottom: -31px;
+  left: 0;
+  height: 20px;
+  z-index: 1;
+}
+
+#footer:before {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 31px;
+  left: 0;
+  height: 50px;
+  z-index: -1;
+}
+
+#todo-count {
+  float: left;
+  text-align: left;
+}
+
+#info {
+  margin: 65px auto 0;
+  color: #a6a6a6;
+  font-size: 12px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+#info a {
+  color: inherit;
+}
+
+
+/*
+   Hack to remove background from Mobile Safari.
+   Can't use it globally since it destroys checkboxes in Firefox and Opera
+*/
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  #toggle-all,
+  #variables-list li .toggle {
+    background: none;
+  }
+  #variables-list li .toggle {
+    height: 40px;
+  }
+  #toggle-all {
+    top: -56px;
+    left: -15px;
+    width: 65px;
+    height: 41px;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.speech-bubble {
+  position: relative;
+  padding: 10px;
+  background: rgba(0, 0, 0, .04);
+}
+
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 30px;
+}
+
+.learn-bar > .learn {
+  position: absolute;
+  width: 272px;
+  top: 8px;
+  left: -300px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, .6);
+  -webkit-transition-property: left;
+  transition-property: left;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+}
