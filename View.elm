@@ -1,17 +1,4 @@
-module Todo (..) where
-
-{-| TodoMVC implemented in Elm, using plain HTML and CSS for rendering.
-This application is broken up into four distinct parts:
-  1. Model  - a full definition of the application's state
-  2. Update - a way to step the application state forward
-  3. View   - a way to visualize our application state with HTML
-  4. Inputs - the signals necessary to manage events
-This clean division of concerns is a core part of Elm. You can read more about
-this in the Pong tutorial: http://elm-lang.org/blog/making-pong
-This program is not particularly large, so definitely see the following
-for notes on structuring more complex GUIs with Elm:
-https://github.com/evancz/elm-architecture-tutorial/
--}
+module NoSyntaxBitch.View (..) where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -20,6 +7,7 @@ import Html.Lazy exposing (lazy, lazy2, lazy3)
 import Json.Decode as Json
 import Signal exposing (Signal, Address)
 import String
+import Operators exposing (binary, unary)
 
 
 ---- MODEL ----
@@ -129,12 +117,17 @@ update action model =
 view : Address Action -> Model -> Html
 view address model =
     div
-        [ class "todomvc-wrapper"
-        , style [ ( "visibility", "hidden" ) ]
+        [ class "wrapper"
+        , style [ ( "margin", "50px" ) ]
         ]
         [ section
-            [ id "todoapp" ]
-            [ lazy2 variableEntry address model.field
+            [ id "variables"
+            , style
+                [ ( "border-right", "1px solid #333" )
+                , ( "width", "300px" )
+                ]
+            ]
+            [ lazy2 newVariableEntry address model.field
             , lazy3 variablesList address model.visibility model.variables
             , lazy3 controls address model.visibility model.variables
             ]
@@ -157,8 +150,8 @@ is13 code =
         Err "not the right key code"
 
 
-variableEntry : Address Action -> String -> Html
-variableEntry address varName =
+newVariableEntry : Address Action -> String -> Html
+newVariableEntry address varName =
     header
         [ id "header" ]
         [ h1 [] [ text "variables" ]
@@ -170,9 +163,13 @@ variableEntry address varName =
                 , placeholder "variable"
                 , autofocus True
                 , value varName
-                , name "newTodo"
+                , name "newVar"
                 , on "input" targetValue (Signal.message address << UpdateField)
                 , onEnter address Add
+                , style
+                    [ ( "border", "none" )
+                    , ( "outline", "none" )
+                    ]
                 ]
                 []
             ]
@@ -190,26 +187,12 @@ variablesList address visibility variables =
         ]
 
 
-variableItemShow : Address Action -> Variable -> Html
-variableItemShow address variable =
-    span
-        []
-        [ label
-            [ onDoubleClick address (EditingVariable variable.id True) ]
-            [ text variable.name ]
-        , button
-            [ class "destroy"
-            , onClick address (Delete variable.id)
-            ]
-            []
-        ]
-
-
 variableItemInput : Address Action -> Variable -> Html
 variableItemInput address variable =
     input
         [ class "edit"
         , value variable.name
+        , autofocus True
         , name "title"
         , id ("variable-" ++ toString variable.id)
         , on "input" targetValue (Signal.message address << UpdateVariable variable.id)
@@ -225,11 +208,20 @@ variableItem address variable =
         [ classList [ ( "editing", variable.editing ) ] ]
         [ div
             [ class "view" ]
-            [ p [] [ text "const" ]
-            , if variable.editing then
-                variableItemInput address variable
-              else
-                variableItemShow address variable
+            [ p
+                [ tabindex 1 ]
+                [ text "const" ]
+            , variableItemInput address variable
+            , span [] [ text "=" ]
+            , select
+                []
+                (List.map (\x -> option [] [ text x ]) binary)
+              -- , button
+              --     [ class "destroy"
+              --     , tabindex -1
+              --     , onClick address (Delete variable.id)
+              --     ]
+              --     [ text "×" ]
             ]
         ]
 
@@ -277,10 +269,11 @@ model =
 
 initialModel : Model
 initialModel =
-    Maybe.withDefault emptyModel getStorage
+    emptyModel
 
 
 
+-- Maybe.withDefault emptyModel getStorage
 -- actions from user input
 
 
@@ -315,9 +308,7 @@ port focus =
 
 
 -- interactions with localStorage to save the model
-
-
-port getStorage : Maybe Model
-port setStorage : Signal Model
-port setStorage =
-    model
+-- port getStorage : Maybe Model
+-- port setStorage : Signal Model
+-- port setStorage =
+--     model

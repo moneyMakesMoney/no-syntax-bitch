@@ -1,4 +1,4 @@
-module NoSyntaxBitch.Operators (..) where
+module Operators (..) where
 
 
 binary : List String

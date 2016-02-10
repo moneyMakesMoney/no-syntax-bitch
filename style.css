@@ -8,8 +8,8 @@ body {
   padding: 0;
 }
 
-.todomvc-wrapper {
-  visibility: visible !important;
+input {
+  background: transparent;
 }
 
 button {
@@ -47,19 +47,21 @@ input {
   font: 16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-#todoapp {
+#variables {
   background: #fff;
   background: rgba(255, 255, 255, 0.9);
   margin: 24px;
   width: 400px;
+  border-right: 1px solid #333;
 }
 
-#todoapp h1 {
+#variables h1 {
   width: 100%;
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 400;
   color: #333;
   font-variant: small-caps;
+  padding: 0 20px;
 }
 
 #new-variable,
@@ -98,7 +100,7 @@ p {
 #new-variable {
   border: none;
   z-index: 2;
-  background: #eee;
+  background: transparent;
   box-shadow: none;
   margin-left: 10px;
 }
@@ -172,7 +174,6 @@ p {
 }
 
 #variables-list li .destroy {
-  display: none;
   position: absolute;
   top: 0;
   right: 10px;
@@ -180,18 +181,11 @@ p {
   width: 40px;
   height: 40px;
   margin: 0;
-  font-size: 22px;
-  color: #a88a8a;
+  font-size: 26px;
+  color: #333;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
-}
-
-#variables-list li .destroy:after {
-  content: '✖';
-}
-
-#variables-list li:hover .destroy {
-  display: block;
+  cursor: pointer;
 }
 
 #variables-list li.editing:last-child {
